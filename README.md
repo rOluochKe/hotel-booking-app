@@ -12,3 +12,7 @@ Hotel Booking Application built using MERN stack.
 - Bootstrap
 - Stripe
 - MongoDB
+- Bootstrap
+- HTML
+- CSS
+- API
