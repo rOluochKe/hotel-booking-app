@@ -5,8 +5,8 @@ import LoginForm from "../components/LoginForm";
 import { useDispatch } from "react-redux";
 
 const Login = ({ history }) => {
-  const [email, setEmail] = useState("johndoe@gmail.com");
-  const [password, setPassword] = useState("1234567");
+  const [email, setEmail] = useState("raymond.migono@gmail.com");
+  const [password, setPassword] = useState("12345678");
 
   const dispatch = useDispatch();
 
@@ -28,7 +28,7 @@ const Login = ({ history }) => {
           type: "LOGGED_IN_USER",
           payload: res.data,
         });
-        history.push("/");
+        history.push("/dashboard");
       }
     } catch (err) {
       console.log(err);

@@ -80,9 +80,9 @@ const DashboardSeller = () => {
       </div>
 
       {auth &&
-      auth.user &&
-      auth.user.stripe_seller &&
-      auth.user.stripe_seller.charges_enabled
+      auth.user
+      // auth.user.stripe_seller &&
+      // auth.user.stripe_seller.charges_enabled
         ? connected()
         : notConnected()}
 
