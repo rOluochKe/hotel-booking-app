@@ -10,6 +10,8 @@ const StripeCallback = ({ history }) => {
 
   useEffect(() => {
     if (auth && auth.token) accountStatus();
+
+    // eslint-disable-next-line
   }, [auth]);
 
   const accountStatus = async () => {

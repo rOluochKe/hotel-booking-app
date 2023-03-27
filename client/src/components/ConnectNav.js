@@ -14,7 +14,7 @@ const { Meta } = Card;
 const { Ribbon } = Badge;
 
 const ConnectNav = () => {
-  const [loading, setLoading] = useState(false);
+  const [, setLoading] = useState(false);
   const [balance, setBalance] = useState(0);
   const { auth } = useSelector((state) => ({ ...state }));
   const { user, token } = auth;
