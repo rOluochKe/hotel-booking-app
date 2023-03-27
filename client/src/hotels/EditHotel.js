@@ -1,13 +1,12 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { toast } from "react-toastify";
-import { Select } from "antd";
-import { createHotel } from "../actions/hotel";
+import { DatePicker, Select } from "antd";
+import { read } from "../actions/hotel";
 import { useSelector } from "react-redux";
-import HotelCreateForm from "../components/forms/HotelCreateForm";
 
 const { Option } = Select;
 
-const NewHotel = () => {
+const EditHotel = ({ match }) => {
   // redux
   const { auth } = useSelector((state) => ({ ...state }));
   const { token } = auth;
@@ -24,38 +23,22 @@ const NewHotel = () => {
   const [preview, setPreview] = useState(
     "https://via.placeholder.com/100x100.png?text=PREVIEW"
   );
-  const [location, setLocation] = useState("");
   // destructuring variables from state
   const { title, content, image, price, from, to, bed } = values;
 
+  useEffect(() => {
+    loadSellerHotel();
+  }, []);
+
+  const loadSellerHotel = async () => {
+    let res = await read(match.params.hotelId);
+    // console.log(res);
+    setValues({ ...values, ...res.data });
+    setPreview(`${process.env.REACT_APP_API}/hotel/image/res.data._id`);
+  };
+
   const handleSubmit = async (e) => {
-    e.preventDefault();
-    // console.log(values);
-    // console.log(location);
-
-    let hotelData = new FormData();
-    hotelData.append("title", title);
-    hotelData.append("content", content);
-    hotelData.append("location", location);
-    hotelData.append("price", price);
-    image && hotelData.append("image", image);
-    hotelData.append("from", from);
-    hotelData.append("to", to);
-    hotelData.append("bed", bed);
-
-    console.log([...hotelData]);
-
-    try {
-      let res = await createHotel(token, hotelData);
-      console.log("HOTEL CREATE RES", res);
-      toast.success("New hotel is posted");
-      setTimeout(() => {
-        window.location.reload();
-      }, 1000);
-    } catch (err) {
-      console.log(err);
-      toast.error(err.response.data);
-    }
+    //
   };
 
   const handleImageChange = (e) => {
@@ -71,21 +54,13 @@ const NewHotel = () => {
   return (
     <>
       <div className="container-fluid bg-secondary p-5 text-center">
-        <h2>Add Hotel</h2>
+        <h2>Edit Hotel</h2>
       </div>
       <div className="container-fluid">
         <div className="row">
           <div className="col-md-10">
             <br />
-            <HotelCreateForm
-              values={values}
-              setValues={setValues}
-              handleChange={handleChange}
-              handleImageChange={handleImageChange}
-              handleSubmit={handleSubmit}
-              location={location}
-              setLocation={setLocation}
-            />
+            show edit form
           </div>
           <div className="col-md-2">
             <img
@@ -94,7 +69,6 @@ const NewHotel = () => {
               className="img img-fluid m-2"
             />
             <pre>{JSON.stringify(values, null, 4)}</pre>
-            {JSON.stringify(location)}
           </div>
         </div>
       </div>
@@ -102,4 +76,4 @@ const NewHotel = () => {
   );
 };
 
-export default NewHotel;
+export default EditHotel;
