@@ -33,17 +33,30 @@ export const getAccountBalance = async (token) =>
     }
   );
 
-  export const currencyFormatter = (data) => {
-    return data.amount.toLocaleString(data.currency, {
-      style: "currency",
-      currency: data.currency,
-    });
-  };
+export const currencyFormatter = (data) => {
+  return data.amount.toLocaleString(data.currency, {
+    style: "currency",
+    currency: data.currency,
+  });
+};
 
 export const payoutSetting = async (token) =>
   await axios.post(
     `${process.env.REACT_APP_API}/payout-setting`,
     {},
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+export const getSessionId = async (token, hotelId) =>
+  await axios.post(
+    `${process.env.REACT_APP_API}/stripe-session-id`,
+    {
+      hotelId,
+    },
     {
       headers: {
         Authorization: `Bearer ${token}`,
