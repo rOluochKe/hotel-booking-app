@@ -34,7 +34,7 @@ export const getAccountBalance = async (token) =>
   );
 
 export const currencyFormatter = (data) => {
-  return data.amount.toLocaleString(data.currency, {
+  return (data.amount / 100).toLocaleString(data.currency, {
     style: "currency",
     currency: data.currency,
   });
@@ -57,6 +57,17 @@ export const getSessionId = async (token, hotelId) =>
     {
       hotelId,
     },
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
+
+export const stripeSuccessRequest = async (token, hotelId) =>
+  await axios.post(
+    `${process.env.REACT_APP_API}/stripe-success`,
+    { hotelId },
     {
       headers: {
         Authorization: `Bearer ${token}`,
