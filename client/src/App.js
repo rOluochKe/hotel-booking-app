@@ -17,6 +17,7 @@ import EditHotel from "./hotels/EditHotel";
 import ViewHotel from "./hotels/ViewHotel";
 import StripeSuccess from "./stripe/StripeSuccess";
 import StripeCancel from "./stripe/StripeCancel";
+import SearchResult from "./hotels/SearchResult";
 
 /**
  * Lets create TopNavigation/menu bar so that we can easily TopNavigate between pages
@@ -48,6 +49,7 @@ function App() {
         <Route exact path="/hotel/:hotelId" component={ViewHotel} />
         <PrivateRoute exact path="/stripe/success/:hotelId" component={StripeSuccess} />
         <PrivateRoute exact path="/stripe/cancel" component={StripeCancel} />
+        <Route exact path="/search-result" component={SearchResult} />
       </Switch>
     </BrowserRouter>
   );

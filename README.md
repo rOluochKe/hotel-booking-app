@@ -9,6 +9,7 @@ Hotel Booking Application built using MERN stack.
 - ExpressJS
 - ReactJS
 - Redux
+- Ant Design
 - Bootstrap
 - Stripe
 - MongoDB
